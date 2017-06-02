@@ -28,7 +28,7 @@ public class AccountService implements IAccountService, Serializable {
 	 long accountNumber;
 	private long amount;
 	private String customerName;
-	private Account account1;
+	private Account account;
 
 	public AccountService() {
 		accountDAO = new AccountDAO();
@@ -62,15 +62,13 @@ public class AccountService implements IAccountService, Serializable {
 	}
  
 	public String depositPage(long accountNumber) {
-		account1 = accountDAO.loadAccount(accountNumber);
-		System.out.println(accountDAO.loadAccount(accountNumber).getAccountnumber()+"========");
-		return "depositPage";
+		account = accountDAO.loadAccount(accountNumber);
+		return "deposit";
 	}
 	
 	
 	public String deposit() {
-		System.out.println("2accountNumber:"+accountNumber);
-		System.out.println("2accountNumber:"+amount);
+		accountNumber = account.getAccountnumber();
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);
@@ -78,9 +76,22 @@ public class AccountService implements IAccountService, Serializable {
 		if (amount > 10000) {
 			jmsSender.sendJMSMessage("Deposit of $ " + amount + " to account with accountNumber= " + accountNumber);
 		}
-		return "depositPage";
+		return "deposit";
 	}
 	
+	
+	public String withdrawPage(long accountNumber) {
+		account = accountDAO.loadAccount(accountNumber);
+		return "withdraw";
+	}
+	
+	public String withdraw() {
+		accountNumber = account.getAccountnumber();
+		Account account = accountDAO.loadAccount(accountNumber);
+		account.withdraw(amount);
+		accountDAO.updateAccount(account);
+		return "withdraw";
+	}
 	//================================================
 	
 
@@ -130,13 +141,7 @@ public class AccountService implements IAccountService, Serializable {
 		accountDAO.updateAccount(account);
 		logger.log("withdraw with parameters accountNumber= " + accountNumber + " , amount= " + amount);
 	}
-	public String withdraw() {
-		Account account = accountDAO.loadAccount(accountNumber);
-		account.withdraw(amount);
-		accountDAO.updateAccount(account);
-		logger.log("withdraw with parameters accountNumber= " + accountNumber + " , amount= " + amount);
-		return "home";
-	}
+
 
 	public void depositEuros(long accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
@@ -198,13 +203,13 @@ public class AccountService implements IAccountService, Serializable {
 	public void setAccountDAO(IAccountDAO accountDAO) {
 		this.accountDAO = accountDAO;
 	}
-	public Account getAccount1() {
-		return account1;
+	public Account getAccount() {
+		return account;
 	}
 
 
-	public void setAccount1(Account account1) {
-		this.account1 = account1;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 

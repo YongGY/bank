@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body>
+	<h1>Deposit</h1>
+	<br />
+	accountNumber:${accountService.account.accountnumber}
+	<br />
+	accountName:${accountService.account.customer.name}
+	<br />
+	Balance:${accountService.account.getBalance()}
+
+	<br />
+	<br />
+	
+	<h:form>
+		<h:outputLabel>Deposit: </h:outputLabel>
+		<h:inputText id="amount" value="${accountService.amount}" />
+		<h:commandButton value="deposit" action="#{accountService.deposit}"> </h:commandButton>
+		<h:commandButton value="backList" action="listAcounts"> </h:commandButton>
+	</h:form>
+	
+	<br />
+	<br />
+	
+	<h:dataTable value="#{accountService.account.entryList}" var="entry"
+		styleClass="order-table" headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row">
+		<h:column>
+			<f:facet name="header">Date: </f:facet>#{entry.date}
+ 		</h:column>
+		<h:column>
+			<f:facet name="header">Amount: </f:facet>
+    			#{entry.amount}
+    		</h:column>
+		<h:column>
+			<f:facet name="header">Description: </f:facet>
+    			#{entry.description}
+    		</h:column>
+	</h:dataTable>
+
+
+</h:body>
+</html>

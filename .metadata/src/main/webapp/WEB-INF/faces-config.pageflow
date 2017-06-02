@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14963504165131" configfile="/bank/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="122" y="370" id="pf14963523125093" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14963523125104 pf14963667597356" path="/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="122" y="562" id="pf14963523125093" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14963523125104 pf14963667597356 pf14964185958606 pf14964187738749" path="/home.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="create.xhtml" x="338" y="178" id="pf14963523125105" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14963523125104" path="/create.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="listAcounts.xhtml" x="338" y="562" id="pf14963667597357" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf14963667597356" path="/listAcounts.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="deposit.xhtml" id="pf14964185958607" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf14964185958606" path="/deposit.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="withdraw.xhtml" id="pf149641877387410" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf14964187738749" path="/withdraw.xhtml"/>
   <links id="pf14963523125104" target="pf14963523125105" source="pf14963523125093" outcome="success" redirect="true"/>
   <links id="pf14963667597356" target="pf14963667597357" source="pf14963523125093" outcome="listAcounts" redirect="true"/>
+  <links id="pf14964185958606" target="pf14964185958607" source="pf14963523125093" outcome="deposit" redirect="true"/>
+  <links id="pf14964187738749" target="pf149641877387410" source="pf14963523125093" outcome="withdraw" redirect="true"/>
 </pageflow:Pageflow>

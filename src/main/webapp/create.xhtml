@@ -6,6 +6,14 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head></h:head>
 <h:body>
+
+	<h:form>
+		<h:commandLink action="home?faces-redirect=true">
+			<h:outputText value="backHome"></h:outputText>
+		</h:commandLink>
+	</h:form>
+ 	<br/>
+ 	
 	<h:form>
 		accountNumber:
 		<h:inputText id="accountNumber" value="#{accountService.accountNumber}"></h:inputText>

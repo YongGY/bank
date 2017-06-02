@@ -9,6 +9,14 @@
 	<h:outputStylesheet library="css" name="table-style.css" />
 </h:head>
 <h:body>
+
+	<h:form>
+		<h:commandLink action="home?faces-redirect=true">
+			<h:outputText value="backHome"></h:outputText>
+		</h:commandLink>
+	</h:form>
+ 	<br/>
+ 	
 	<h:dataTable value="#{accountService.allAccounts}" var="o"
 		styleClass="order-table" headerClass="order-table-header"
 		rowClasses="order-table-odd-row,order-table-even-row">
@@ -32,7 +40,7 @@
 		<h:column>
 			<f:facet name="header"></f:facet>
 			<h:form>
-				<h:commandLink action="#{accountService.depositPage(o.getAccountnumber())}">
+				<h:commandLink action="#{accountService.withdrawPage(o.getAccountnumber())}">
 					<h:outputText value="withdraw"></h:outputText>
 				</h:commandLink>
 			</h:form>
