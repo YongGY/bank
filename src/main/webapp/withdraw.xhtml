@@ -21,13 +21,14 @@
 	<br />
 	<br />
 	
-	<h:form>
+	<h:form style="float: left;">
 		<h:outputLabel>withdraw: </h:outputLabel>
 		<h:inputText id="amount" value="${accountService.amount}" />
 		<h:commandButton value="withdraw" action="#{accountService.withdraw}"> </h:commandButton>
-		<h:commandButton value="backList" action="listAcounts"> </h:commandButton>
 	</h:form>
-	
+	<h:form>
+			<h:commandButton value="Back" action="listAcounts"> </h:commandButton>
+	</h:form>
 	<br />
 	<br />
 	
