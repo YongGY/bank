@@ -4,16 +4,12 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
+import javax.faces.flow.FlowScoped;
 import javax.inject.Named;
 
 @Named
 @ApplicationScoped
+@FlowScoped("pizza-order")
 public class Account implements Serializable{
 	long accountnumber;
 	Collection<AccountEntry> entryList = new ArrayList<AccountEntry>();
