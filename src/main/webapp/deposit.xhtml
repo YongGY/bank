@@ -22,9 +22,16 @@
 	
 	<h:form>
 		<h:outputLabel>Deposit: </h:outputLabel>
-		<h:inputText id="amount" value="${accountService.amount}" required="true" validator="#{accountService.validate}"/>
+		
+
+		<h:inputText id="amount" value="${accountService.amount}" required="true" validator="#{accountService.validate}">
+			<f:validateDoubleRange minimum="1" ></f:validateDoubleRange>
+		</h:inputText>
 		<h:commandButton value="deposit" action="#{accountService.deposit}"> </h:commandButton>
 		<h:commandButton value="backList" action="listAcounts"> </h:commandButton>
+		
+		            <h:message for="amount1"></h:message><br/>  
+		
 	</h:form>
 	
 	<br />
