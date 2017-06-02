@@ -3,11 +3,13 @@ package cs544.exercise5_3.bank.domain;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 
-@ManagedBean
-@SessionScoped
+@Named
+@ApplicationScoped
 public class Account implements Serializable{
 	long accountnumber;
 	Collection<AccountEntry> entryList = new ArrayList<AccountEntry>();

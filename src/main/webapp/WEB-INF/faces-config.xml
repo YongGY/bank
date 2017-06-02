@@ -12,11 +12,20 @@
 			<to-view-id>/create.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
+		
 		<navigation-case>
 			<from-outcome>listAcounts</from-outcome>
 			<to-view-id>/listAcounts.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>depositPage</from-outcome>
+			<to-view-id>/depositPage.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		
 	</navigation-rule>
 
 

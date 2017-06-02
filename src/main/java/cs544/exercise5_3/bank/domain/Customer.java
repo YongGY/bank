@@ -1,5 +1,11 @@
 package cs544.exercise5_3.bank.domain;
 
+import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
+
+@Named
+@RequestScoped
 public class Customer {
 	private String name;
 

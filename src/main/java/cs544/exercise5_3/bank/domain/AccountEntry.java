@@ -3,10 +3,12 @@ package cs544.exercise5_3.bank.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-@ManagedBean
-@SessionScoped
+import javax.inject.Named;
+@Named
+@ApplicationScoped
 public class AccountEntry implements Serializable{
 	private Date date;
 	private double amount;

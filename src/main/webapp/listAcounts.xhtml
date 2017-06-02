@@ -3,27 +3,42 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"      xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
+	<h:outputStylesheet library="css" name="table-style.css" />
 </h:head>
 <h:body>
-	<h:dataTable value="#{accountService.allAccounts}" var="o">
+	<h:dataTable value="#{accountService.allAccounts}" var="o"
+		styleClass="order-table" headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row">
 		<h:column>
-			<f:facet name="header">accountNum</f:facet>#{o.accountnumber} </h:column>
+			<f:facet name="header">accountNum</f:facet>#{o.getAccountnumber()} 
+		</h:column>
+		<h:column>
+			<f:facet name="header">accountName</f:facet>#{o.getCustomer().getName()} 
+		</h:column>
+		<h:column>
+			<f:facet name="header">Balance</f:facet>#{o.getBalance()} 
+		</h:column>
+		<h:column>
+			<f:facet name="header"></f:facet>
+			<h:form>
+				<h:commandLink action="#{accountService.depositPage(o.getAccountnumber())}">
+					<h:outputText value="deposit"></h:outputText>
+				</h:commandLink>
+			</h:form>
+		</h:column>
+		<h:column>
+			<f:facet name="header"></f:facet>
+			<h:form>
+				<h:commandLink action="#{accountService.depositPage(o.getAccountnumber())}">
+					<h:outputText value="withdraw"></h:outputText>
+				</h:commandLink>
+			</h:form>
+		</h:column>
 	</h:dataTable>
-	------------------------------
-<!--  	<h:form> -->
-<!--            <ui:repeat value="#{accountService.getAllAccounts2()}" var="acc"> -->
-<!--            Name: #{acc.getCustomer().getName()} <br/> -->
-<!--            Account Number: #{acc.getAccountnumber()} -->
-<!--            <br/> -->
-<!--            <h:commandButton value="details" action="account"> -->
-<!--            		<f:param value="#{acc}" name="acc" /> -->
-<!--            </h:commandButton> -->
-<!--            <br/> -->
-<!--         </ui:repeat>   -->
-<!--         </h:form> -->
-	
+
+
 </h:body>
 </html>

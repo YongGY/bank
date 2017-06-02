@@ -1,11 +1,9 @@
 package cs544.exercise5_3.bank.service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 import cs544.exercise5_3.bank.dao.AccountDAO;
@@ -16,9 +14,8 @@ import cs544.exercise5_3.bank.jms.IJMSSender;
 import cs544.exercise5_3.bank.jms.JMSSender;
 import cs544.exercise5_3.bank.logging.ILogger;
 import cs544.exercise5_3.bank.logging.Logger;
-//@Named
-@ManagedBean
-@SessionScoped
+@Named
+@ApplicationScoped
 public class AccountService implements IAccountService, Serializable {
 	/**
 	 * 
@@ -31,8 +28,17 @@ public class AccountService implements IAccountService, Serializable {
 	 long accountNumber;
 	private long amount;
 	private String customerName;
+	private Account account1;
 
-
+	public AccountService() {
+		accountDAO = new AccountDAO();
+		currencyConverter = new CurrencyConverter();
+		jmsSender = new JMSSender();
+		logger = new Logger();
+ 		
+	}
+	
+	
 	public String create() {
 		System.out.println("create");
 		return "success";
@@ -46,9 +52,6 @@ public class AccountService implements IAccountService, Serializable {
 		account.setCustomer(customer);
 		accountDAO.saveAccount(account);
 		
-
-		ArrayList<Account> acc = (ArrayList<Account>) accountDAO.getAccounts();
-		System.out.println(acc.size());
 		logger.log(
 				"createAccount with parameters accountNumber= " + accountNumber + " , customerName= " + customerName);
 		return "home";
@@ -57,21 +60,36 @@ public class AccountService implements IAccountService, Serializable {
 	public Collection<Account> getAllAccounts() {
 		return  accountDAO.getAccounts();
 	}
-	
-	public ArrayList<Account> getAllAccounts2() {
-		ArrayList<Account> acc = (ArrayList<Account>) accountDAO.getAccounts();
-		return acc;
+ 
+	public String depositPage(long accountNumber) {
+		account1 = accountDAO.loadAccount(accountNumber);
+		System.out.println(accountDAO.loadAccount(accountNumber).getAccountnumber()+"========");
+		return "depositPage";
 	}
+	
+	
+	public String deposit() {
+		System.out.println("2accountNumber:"+accountNumber);
+		System.out.println("2accountNumber:"+amount);
+		Account account = accountDAO.loadAccount(accountNumber);
+		account.deposit(amount);
+		accountDAO.updateAccount(account);
+		logger.log("deposit with parameters accountNumber= " + accountNumber + " , amount= " + amount);
+		if (amount > 10000) {
+			jmsSender.sendJMSMessage("Deposit of $ " + amount + " to account with accountNumber= " + accountNumber);
+		}
+		return "depositPage";
+	}
+	
 	//================================================
 	
 
+	
 
-	public AccountService() {
-		accountDAO = new AccountDAO();
-		currencyConverter = new CurrencyConverter();
-		jmsSender = new JMSSender();
-		logger = new Logger();
-	}
+
+
+
+
 
 	public Account createAccount(long accountNumber, String customerName) {
 		Account account = new Account(accountNumber);
@@ -87,6 +105,8 @@ public class AccountService implements IAccountService, Serializable {
 
 
 	public void deposit(long accountNumber, double amount) {
+		System.out.println("1accountNumber:"+accountNumber);
+		System.out.println("1accountNumber:"+amount);
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);
@@ -95,24 +115,8 @@ public class AccountService implements IAccountService, Serializable {
 			jmsSender.sendJMSMessage("Deposit of $ " + amount + " to account with accountNumber= " + accountNumber);
 		}
 	}
-	public String deposit() {
-		Account account = accountDAO.loadAccount(accountNumber);
-		account.deposit(amount);
-		accountDAO.updateAccount(account);
-		logger.log("deposit with parameters accountNumber= " + accountNumber + " , amount= " + amount);
-		if (amount > 10000) {
-			jmsSender.sendJMSMessage("Deposit of $ " + amount + " to account with accountNumber= " + accountNumber);
-		}
-		return "home";
-	}
 
-	public long getAmount() {
-		return amount;
-	}
 
-	public void setAmount(long amount) {
-		this.amount = amount;
-	}
 
 	public Account getAccount(long accountNumber) {
 		Account account = accountDAO.loadAccount(accountNumber);
@@ -183,5 +187,32 @@ public class AccountService implements IAccountService, Serializable {
 
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+
+
+	public IAccountDAO getAccountDAO() {
+		return accountDAO;
+	}
+
+
+	public void setAccountDAO(IAccountDAO accountDAO) {
+		this.accountDAO = accountDAO;
+	}
+	public Account getAccount1() {
+		return account1;
+	}
+
+
+	public void setAccount1(Account account1) {
+		this.account1 = account1;
+	}
+	
+
+	public long getAmount() {
+		return amount;
+	}
+
+	public void setAmount(long amount) {
+		this.amount = amount;
 	}
 }
