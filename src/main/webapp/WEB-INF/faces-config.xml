@@ -30,7 +30,7 @@
 			<to-view-id>/withdraw.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
-		
+
  
 	</navigation-rule>
 
