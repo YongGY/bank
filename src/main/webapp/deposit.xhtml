@@ -22,7 +22,7 @@
 	
 	<h:form>
 		<h:outputLabel>Deposit: </h:outputLabel>
-		<h:inputText id="amount" value="${accountService.amount}" />
+		<h:inputText id="amount" value="${accountService.amount}" required="true" validator="#{accountService.validate}"/>
 		<h:commandButton value="deposit" action="#{accountService.deposit}"> </h:commandButton>
 		<h:commandButton value="backList" action="listAcounts"> </h:commandButton>
 	</h:form>

@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 
 import cs544.exercise5_3.bank.dao.AccountDAO;
@@ -51,9 +55,6 @@ public class AccountService implements IAccountService, Serializable {
 		Customer customer = new Customer(customerName);
 		account.setCustomer(customer);
 		accountDAO.saveAccount(account);
-		
-		logger.log(
-				"createAccount with parameters accountNumber= " + accountNumber + " , customerName= " + customerName);
 		return "home";
 	}
 	
@@ -92,7 +93,10 @@ public class AccountService implements IAccountService, Serializable {
 		accountDAO.updateAccount(account);
 		return "withdraw";
 	}
-	//================================================
+	//=========================================================================================================
+	//=========================================================================================================
+	//=========================================================================================================
+	//=========================================================================================================
 	
 
 	
@@ -177,6 +181,11 @@ public class AccountService implements IAccountService, Serializable {
 	}
 	
 	
+//===============================================================================================
+//===============================================================================================
+//===============================================================================================
+//===============================================================================================
+	
 	
 	public long getAccountNumber() {
 		return accountNumber;
@@ -219,5 +228,14 @@ public class AccountService implements IAccountService, Serializable {
 
 	public void setAmount(long amount) {
 		this.amount = amount;
+	}
+	
+	public void validate(FacesContext context, UIComponent component, Object obj) throws ValidatorException {
+		long deposit = (Long) obj;
+
+		if (deposit <= 0) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "the deposits are positive and greater than zero", "error！");
+			throw new ValidatorException(message);
+		}
 	}
 }

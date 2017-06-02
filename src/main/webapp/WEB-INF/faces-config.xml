@@ -13,23 +13,23 @@
 			<redirect/>
 		</navigation-case>
 		
-		<navigation-case>
-			<from-outcome>listAcounts</from-outcome>
-			<to-view-id>/listAcounts.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>listAcounts</from-outcome> -->
+<!-- 			<to-view-id>/listAcounts.xhtml</to-view-id> -->
+<!-- 			<redirect/> -->
+<!-- 		</navigation-case> -->
 		
-		<navigation-case>
-			<from-outcome>deposit</from-outcome>
-			<to-view-id>/deposit.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>deposit</from-outcome> -->
+<!-- 			<to-view-id>/deposit.xhtml</to-view-id> -->
+<!-- 			<redirect/> -->
+<!-- 		</navigation-case> -->
 		
-		<navigation-case>
-			<from-outcome>withdraw</from-outcome>
-			<to-view-id>/withdraw.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>withdraw</from-outcome> -->
+<!-- 			<to-view-id>/withdraw.xhtml</to-view-id> -->
+<!-- 			<redirect/> -->
+<!-- 		</navigation-case> -->
 		
  
 		
