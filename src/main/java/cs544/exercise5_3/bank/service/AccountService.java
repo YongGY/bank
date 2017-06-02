@@ -234,7 +234,7 @@ public class AccountService implements IAccountService, Serializable {
 		long deposit = (Long) obj;
 
 		if (deposit <= 0) {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "the deposits are positive and greater than zero", "error！");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "the deposits are positive and greater than zero", "Invalid deposits！");
 			throw new ValidatorException(message);
 		}
 	}
